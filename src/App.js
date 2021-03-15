@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+// import React, { Components } from 'react';
+import React, { useState } from 'react';
+// import LeaveFeedback from './components/LeaveFeedback';
+// import Statistics from './components/Statistics';
+// import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  // state = {
+  //   good: 0,
+  //   neutral: 0,
+  //   bad: 0,
+  // };
+  // countTotalFeedback();
+  // countTotalFeedback();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>Вы нажали {count} раз</p>
+      <button onClick={() => setCount(count + 1)}>Нажми на меня</button>
     </div>
   );
-}
+};
 
 export default App;
