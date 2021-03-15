@@ -2,13 +2,11 @@ import PropTypes from 'prop-types';
 
 function Notification({message}) {
     return (
-        <section>
-            <p>{message}</p>
-        </section>
+        <p>{message}</p>
     );
 }
 
-Section.propTypes = {
+Notification.propTypes = {
     message: PropTypes.string.isRequired,
 
 };
