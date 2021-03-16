@@ -4,7 +4,7 @@ const FeedbackOptions = ({ onIncrement, onNeutral, onDecrement }) => (
   <>
     <button onClick={onIncrement}>Good</button>
     <button onClick={onNeutral}>Neutral</button>
-    <button onClick={() => setCount(count - 1)}>Bad</button>
+    <button onClick={onDecrement}>Bad</button>
   </>
 );
 
