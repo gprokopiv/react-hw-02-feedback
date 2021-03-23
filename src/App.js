@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 
 import Container from './components/Container';
 import Section from './components/Section';
-// import Notification from './components/Notification';
-// import FeedbackOptions from './components/FeedbackOptions';
-// import Statistics from './components/Statistics';
-// import logo from './logo.svg';
+import Notification from './components/Notification';
+import FeedbackOptions from './components/FeedbackOptions';
+import Statistics from './components/Statistics';
 import './App.css';
 
 class App extends Component {
@@ -47,20 +46,27 @@ class App extends Component {
     const percent = this.countPositiveFeedbackPercentage(total);
     return (
       <Container>
-        <Section>
-          <ul>
-            <li>Good: {good}</li>
-            <li>Neutral: {neutral}</li>
-            <li>Bad: {bad}</li>
-            <li>Total: {total}</li>
-            <li>Positive Percentage: {percent} %</li>
-          </ul>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            good={this.increaseGood}
+            neutral={this.increaseNeutral}
+            bad={this.increaseBad}
+          />
         </Section>
-        <Section>
-          <button onClick={this.increaseGood}>Good</button>
-          <button onClick={this.increaseNeutral}>Neutral</button>
-          <button onClick={this.increaseBad}>Bad</button>
-        </Section>
+
+        {total > 0 ? (
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              countTotalFeedback={total}
+              positivePercentage={percent}
+            />
+          </Section>
+        ) : (
+          <Notification message="No feedback given" />
+        )}
       </Container>
     );
   }
