@@ -16,35 +16,49 @@ class App extends Component {
     bad: 0,
   };
 
-  countTotalFeedback()
-  countPositiveFeedbackPercentage()
-  
-  increase = event => {
-    this.setState(prevState => {
-      const good = prevState.good + 1;
-      const neutral = prevState.neutral + 1;
-      const bad = prevState.bad + 1;
-
-      return {
-        good,
-        neutral,
-        bad,
-      };
-    });
-    console.log(this.state.good, '---this.state.good');
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce((acc, option) => acc + option, 0);
+  };
+  countPositiveFeedbackPercentage = () => {
+    return Math.round((this.good / this.countTotalFeedback()) * 100) || 0;
   };
 
+  // increase = event => {
+  //   this.setState(prevState => {
+  //     const good = prevState.good + 1;
+  //     const neutral = prevState.neutral + 1;
+  //     const bad = prevState.bad + 1;
+
+  //     return {
+  //       good,
+  //       neutral,
+  //       bad,
+  //     };
+  //   });
+  //   console.log(this.state.good, '---this.state.good');
+  // };
+
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <Container>
-        <Section />
-        <h1>Good: {this.state.good}</h1>
-        <h1>Neutral: {this.state.neutral}</h1>
-        <h1>Neutral: {this.state.bad}</h1>
-
-        <button onClick={this.increase}>Good</button>
-        <button onClick={this.increase}>Neutral</button>
-        <button onClick={this.increase}>Bad</button>
+        <Section>
+          <ul>
+            <li>Good: {good}</li>
+            <li>Neutral: {neutral}</li>
+            <li>Bad: {bad}</li>
+            <li>Total: {this.countTotalFeedback}</li>
+            <li>
+              Positive Percentage: {this.countPositiveFeedbackPercentage} %
+            </li>
+          </ul>
+        </Section>
+        {/* <Section>
+          <button onClick={this.increase}>Good</button>
+          <button onClick={this.increase}>Neutral</button>
+          <button onClick={this.increase}>Bad</button>
+        </Section> */}
       </Container>
     );
   }
