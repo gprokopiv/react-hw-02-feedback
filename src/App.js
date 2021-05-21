@@ -20,26 +20,36 @@ class App extends Component {
   countPositiveFeedbackPercentage(total) {
     return Math.round((this.state.good * 100) / total);
   }
-
-  increaseGood = () => {
-    this.setState(prevState => {
-      const good = prevState.good + 1;
-      return { good };
-    });
+  // addFeedback = option => {
+  //   this.setState(state => {
+  //     const good = state.good + 1;
+  //     return { good };
+  //     //[option]: state[option] + 1,
+  //   });
+  // };
+  // increaseGood = () => {
+  //   this.setState(prevState => {
+  //     const good = prevState.good + 1;
+  //     return { good };
+  //   });
+  // };
+  // increaseNeutral = () => {
+  //   this.setState(prevState => {
+  //     const neutral = prevState.neutral + 1;
+  //     return { neutral };
+  //   });
+  // };
+  // increaseBad = () => {
+  //   this.setState(prevState => {
+  //     const bad = prevState.bad + 1;
+  //     return { bad };
+  //   });
+  // };
+  addFeedback = option => {
+    this.setState(state => ({
+      [option]: state[option] + 1,
+    }));
   };
-  increaseNeutral = () => {
-    this.setState(prevState => {
-      const neutral = prevState.neutral + 1;
-      return { neutral };
-    });
-  };
-  increaseBad = () => {
-    this.setState(prevState => {
-      const bad = prevState.bad + 1;
-      return { bad };
-    });
-  };
-
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
@@ -48,10 +58,16 @@ class App extends Component {
       <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            good={this.increaseGood}
-            neutral={this.increaseNeutral}
-            bad={this.increaseBad}
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.addFeedback}
           />
+          {/* <FeedbackOptions
+            options={(good, neutral, bad)}
+            onLeaveFeedback={this.addFeedback} */}
+          {/* // good={this.increaseGood}
+            // neutral={this.increaseNeutral}
+            // bad={this.increaseBad}
+          /> */}
         </Section>
         <Section title="Statistics">
           {total > 0 ? (
